@@ -1,0 +1,72 @@
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('[data-toggle=tooltip]').hover(function(){
+            // on mouseenter
+            $(this).tooltip('show');
+        }, function(){
+            // on mouseleave
+            $(this).tooltip('hide');
+        });
+    });
+</script>
+<span us-spinner ng-show="!viewDidLoad"></span>
+
+<div ng-show="viewDidLoad">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3 class="panel-title">{{customer.info.firstname + ' ' + customer.info.lastname}}</h3>
+                    <br>
+                    <span class="glyphicon glyphicon-earphone"></span> <span>{{customer.info.phone}}</span><br>
+                    <span class="glyphicon glyphicon-envelope"></span> <span
+                        data-toggle="tooltip" data-placement="bottom" title="{{customer.info.email}}">
+                    <a ng-href="mailto:{{customer.info.email}}">Send e-post</a></span><br>
+                    <span class="glyphicon glyphicon-calendar"></span> <span
+                        data-toggle="tooltip" data-placement="bottom" title="Dato opprettet">{{convertDateToSimpleString.get(customer.info.signupdate)}}</span>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <button type="button" style="width:100%" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                        Ny avtale
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+
+            <form name="newCustomerForm" ng-submit="newCustomer(newCustomerForm.$valid)" novalidate>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Ny avtale</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-tags"></span></span>
+                            <input type="text" class="form-control" ng-model="customer.phone" placeholder="Avtale notater" required
+                                   ng-minlength="8" ng-maxlength="8">
+                        </div>
+                        <br>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button ng-disabled="newCustomerForm.$invalid" ng-click="newCustomer(customer)" class="btn btn-primary"><span data-dismiss="modal">Opprett</span></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

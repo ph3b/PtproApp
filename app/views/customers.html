@@ -1,0 +1,126 @@
+<span us-spinner ng-show="!viewDidLoad"></span>
+<div ng-show="viewDidLoad">
+<div class="row">
+    <div class="col-sm-3">
+        <!--Sidebar-->
+        <div class="row">
+            <div class="col-sm-12">
+                <!--Søk-->
+                <div class="row">
+                    <div class="box box-solid">
+                        <div class="box-header">
+                        </div>
+                        <div class="box-body">
+                            <div class="box-body no-padding">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                                    <input type="text" class="form-control"  placeholder="Søk">
+                                </div>
+                            </div>
+                        </div><!-- /.box-body -->
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <button type="button" style="width:100%" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                        Ny kunde
+                    </button>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <!--Ny bruker-->
+                <div class="box box-solid">
+
+                </div>
+            </div>
+        </div>
+     </div>
+    <div class="col-sm-9">
+        <div class="row">
+            <div class="col-sm-12">
+                <!--Content-->
+                <div class="box box-solid">
+                    <div class="box-header">
+                    </div>
+                    <div class="box-body">
+                        <div class="box-body no-padding">
+                            <table class="table table-hover">
+                                <tbody><tr>
+                                    <th>Fornavn</th>
+                                    <th>Etternavn</th>
+                                    <th>Telefon</th>
+                                    <th>Opprettet</th>
+                                </tr>
+                                <tr ng-repeat="customer in customers" ng-click="goToCustomer(customer._id)">
+                                    <td>{{customer.info.firstname}}</td>
+                                    <td>{{customer.info.lastname}}</td>
+                                    <td>{{customer.info.phone}}</td>
+                                    <td>{{convertDateToSimpleString.get(customer.info.signupdate)}}</td>
+                                </tr>
+                                </tbody></table>
+                        </div>
+                    </div><!-- /.box-body -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form name="newCustomerForm" ng-submit="newCustomer(newCustomerForm.$valid)" novalidate>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Ny kunde</h4>
+            </div>
+            <div class="modal-body">
+
+                    <div class="box-header">
+                    </div>
+                    <div class="box-body">
+                        <div class="input-group">
+
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-info-sign"></span></span>
+                            <input type="text" class="form-control" ng-model="customer.firstname" placeholder="Fornavn" required>
+                        </div>
+                        <br>
+                        <div class="input-group">
+
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-info-sign"></span></span>
+                            <input type="text" class="form-control" ng-model="customer.lastname" placeholder="Etternavn" required>
+
+                        </div>
+                        <br>
+                        <div class="input-group">
+
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+                            <input type="text" class="form-control" ng-model="customer.email" placeholder="E-post" required>
+
+                        </div>
+                        <br>
+                        <div class="input-group">
+
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-earphone"></span></span>
+                            <input type="text" class="form-control" ng-model="customer.phone" placeholder="Telefon" required
+                                   ng-minlength="8" ng-maxlength="8">
+
+                        </div>
+
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button ng-disabled="newCustomerForm.$invalid" ng-click="newCustomer(customer)" class="btn btn-primary"><span data-dismiss="modal">Opprett</span></button>
+            </div>
+
+        </div>
+       </form>
+    </div>
+</div>
+</div>

@@ -1,0 +1,52 @@
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('[data-toggle=tooltip]').hover(function(){
+            // on mouseenter
+            $(this).tooltip('show');
+        }, function(){
+            // on mouseleave
+            $(this).tooltip('hide');
+        });
+    });
+</script>
+    <span us-spinner ng-show="!viewDidLoad"></span>
+
+<div ng-show="viewDidLoad">
+<div class="row" ng-show="!profileIsComplete()">
+    <div class="col-sm-3">
+    </div>
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group">
+                    <input class="form-control" ng-model="profile.firstname" id="focusedInput" type="text" placeholder="Fornavn">
+                </div>
+
+                <div class="form-group">
+                    <input class="form-control" ng-model="profile.lastname" id="focusedInput" type="text" placeholder="Etternavn">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-5"></div>
+            <div class="col-sm-5"><button ng-click="updateCoach(profile)" class="btn btn-success">Lagre</button></div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+    <div class="col-sm-3"></div>
+</div>
+
+
+<div class="row" ng-show="profileIsComplete()">
+    <div class="col-sm-3">
+    </div>
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3 class="panel-title">{{user.firstname + ' ' + user.lastname}}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3"></div>
+</div>
+</div>
