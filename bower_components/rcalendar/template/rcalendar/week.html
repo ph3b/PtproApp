@@ -1,0 +1,33 @@
+<div>
+    <table class="table table-bordered table-fixed weekview-header">
+        <thead>
+        <tr>
+            <th class="calendar-hour-column"></th>
+            <th ng-repeat="dt in dates" class="text-center">{{dt.date| date: 'EEE M/d'}}</th>
+            <th ng-if="gutterWidth>0" ng-style="{width: gutterWidth+'px'}"></th>
+        </tr>
+        </thead>
+    </table>
+    
+    <div class="scrollable" style="height: 400px">
+        <table class="table table-bordered table-fixed">
+            <tbody>
+            <tr ng-repeat="row in rows track by $index" ng-if="$index > 5">
+                <td class="calendar-hour-column text-right">
+                    {{$index<10?'0' + $index + ':00' : $index + ':00'}}
+                </td>
+                <td ng-repeat="tm in row track by tm.time" class="calendar-cell">
+                    <div ng-class="{'calendar-event-wrap': tm.events}" ng-if="tm.events">
+                        <div ng-repeat="displayEvent in tm.events" class="calendar-event"
+                             ng-click="eventSelected({event:displayEvent.event})"
+                             ng-style="{left: 100/displayEvent.overlapNumber*displayEvent.position+'%', width: 100/displayEvent.overlapNumber+'%', height: 37*(displayEvent.endIndex-displayEvent.startIndex)+'px'}">
+                            <div class="calendar-event-inner">{{displayEvent.event.title}}</div>
+                        </div>
+                    </div>
+                </td>
+                <td ng-if="normalGutterWidth>0" ng-style="{width: normalGutterWidth+'px'}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
